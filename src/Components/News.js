@@ -26,7 +26,7 @@ const News = (props) => {
 
     useEffect(() => {
         updateNews()
-    })
+    }, [])
 
     //prev and next button not required after infinite scrolling
     // const handlePrevious = async () => {
@@ -58,7 +58,7 @@ const News = (props) => {
     return (
         <>
             <h1 className="text-center">NewsMonkey- Top Headlines Of The Day</h1>
-            {loading && <Spinner />}
+            /*{loading && <Spinner />}*/
 
             <InfiniteScroll
                 dataLength={articles.length}
