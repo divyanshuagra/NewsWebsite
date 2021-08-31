@@ -18,7 +18,6 @@ const News = (props) => {
         let data = await fetch(url)
         let parsedData = await data.json()
 
-        console.log(parsedData)
         setarticles(parsedData.articles)
         settotalResults(parsedData.totalResults)
         setloading(false)
@@ -28,25 +27,11 @@ const News = (props) => {
         updateNews()
     }, [])
 
-    //prev and next button not required after infinite scrolling
-    // const handlePrevious = async () => {
-
-    //     this.setState({ page: this.state.page - 1 })
-    //     this.updateNews()
-
-    // }
-
-    // const handleNext = async () => {
-
-    //     this.setState({ page: this.state.page + 1 })
-    //     this.updateNews()
-
-    // }
 
     const fetchMoreData = async () => {
-        setpage(page + 1)
 
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=d332c1c1afdc40a0b47c2823f291f53e&page=${page}&pageSize=${props.pageSize}`
+        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=d332c1c1afdc40a0b47c2823f291f53e&page=${page + 1}&pageSize=${props.pageSize}`
+        setpage(page + 1)
         setloading(true)
         let data = await fetch(url)
         let parsedData = await data.json()
@@ -57,8 +42,8 @@ const News = (props) => {
 
     return (
         <>
-            <h1 className="text-center">NewsMonkey- Top Headlines Of The Day</h1>
-            /*{loading && <Spinner />}*/
+            <h1 className="text-center">NewsMonkey- Top {props.category.toUpperCase()} Headlines Of The Day</h1>
+            {/* {loading && <Spinner />} */}
 
             <InfiniteScroll
                 dataLength={articles.length}
